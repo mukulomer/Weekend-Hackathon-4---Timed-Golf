@@ -4,25 +4,26 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      gameStart: false,
       time: 0,
       x: 0,
       y: 0,
       ballPosition: {
         left: "0px",
         top: "0px"
-      },
-      gameStart: false
+      }
     };
     this.count = 5;
+    this.flag = false;
     this.timer;
     this.top = this.count;
-    this.handleClick = this.handleClick.bind(this);
     this.MoveRight = this.MoveRight.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {}
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     if (this.state.gameStart) {
       this.setState({ gameStart: false });
       document.addEventListener("keydown", this.MoveRight);
@@ -30,11 +31,17 @@ class Timer extends React.Component {
         this.setState({ time: this.state.time + 1 });
       }, 1000);
     }
+
+    if (
+      this.state.ballPosition.left === "250px" &&
+      this.state.ballPosition.top === "250px"
+    ) {
+      this.componentWillUnmount();
+    }
   }
 
   handleClick() {
     this.setState({ gameStart: true });
-    console.log(this.state.gameStart);
   }
 
   MoveRight(event) {
@@ -76,7 +83,7 @@ class Timer extends React.Component {
         <button onClick={this.handleClick} className="start">
           Start
         </button>
-        <div className="timer">{this.state.time}</div>
+        <div className="heading-timer">{this.state.time}</div>
       </>
     );
   }
