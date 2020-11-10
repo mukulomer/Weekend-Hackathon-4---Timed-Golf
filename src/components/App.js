@@ -81,6 +81,7 @@ class Timer extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    document.removeEventListener("keydown", this.MoveRight);
   }
 
   render() {
