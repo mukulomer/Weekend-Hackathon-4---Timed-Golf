@@ -13,7 +13,7 @@ class Timer extends React.Component {
         top: "0px"
       }
     };
-    this.count = 5;
+    this.count = 0;
     this.flag = false;
     this.timer;
     this.top = this.count;
@@ -46,28 +46,36 @@ class Timer extends React.Component {
 
   MoveRight(event) {
     if (event.key === "ArrowRight") {
+      this.count = this.count + 5;
       this.setState({
         ballPosition: { left: `${this.count}px`, top: `${this.top}px` }
       });
-      this.count = this.count + 5;
+
+      console.log(this.state.ballPosition);
     }
     if (event.key === "ArrowLeft") {
+      this.count = this.count - 5;
       this.setState({
         ballPosition: { left: `${this.count}px`, top: `${this.top}px` }
       });
-      this.count = this.count - 5;
+
+      console.log(this.state.ballPosition);
     }
     if (event.key === "ArrowDown") {
+      this.top = this.top + 5;
       this.setState({
         ballPosition: { top: `${this.top}px`, left: `${this.count}px` }
       });
-      this.top = this.top + 5;
+
+      console.log(this.state.ballPosition);
     }
     if (event.key === "ArrowUp") {
+      this.top = this.top - 5;
       this.setState({
         ballPosition: { top: `${this.top}px`, left: `${this.count}px` }
       });
-      this.top = this.top - 5;
+
+      console.log(this.state.ballPosition);
     }
   }
 
